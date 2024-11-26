@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->   
+    <meta name="robots" content="noindex,nofollow"/>
+    <title>Selamat datang</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/toastr/toastr.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/custom.css}"/>
+    
+</head>
+<body>  
+    <div class="main-wrapper">
+        <div class="row auth-wrapper gx-0">
+            <div class="col-lg-4 col-xl-3 auth-box-2 on-sidebar" style="background-color:  rgb(220,20,60);">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-md-12 col-lg-12 col-xl-12">
+                            <h1 class="text-white">Be Colony</h1>
+                            <h3 class="text-white mt-4 fw-light">Welcome to Be Col performance</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-xl-9 d-flex align-items-center justify-content-center">
+                <div class="row justify-content-center w-100 mt-4 mt-lg-0">
+                    <div class="col-lg-6 col-xl-4 col-md-7">
+                        <div class="card" id="loginform">
+                            <div class="card-body">
+                                <div class="text-center"><span class="db"><img th:src="@{/assets/images/logos/bishub-logo-md.png}" alt="logo" width="17%" /></span></div>
+                                <div class="alert alert-light-danger rounded-pill text-danger fade show mb-0 mt-3" role="alert" th:if="${session?.error}">
+                                    <div class="font-weight-light text-center">
+                                        <span th:text="${session?.error}"></span>
+                                    </div>
+                                </div>
+                                <form class="form-horizontal pt-4" th:action="@{/login}"  method="POST" th:object="${login}">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" th:field="*{username}" class="form-control form-input-bg" autocomplete="off" placeholder="Username"/>
+                                        <label for="username"><i class="ri-user-3-line feather-sm text-dark fill-white me-2"></i>Username</label>
+                                        
+                                        <span class="text-danger" th:text="${session?.errorusername}"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="password" th:field="*{password}" class="form-control form-input-bg" autocomplete="off" placeholder="Password"/>
+                                        <label for="password"><i class="ri-lock-password-line feather-sm text-dark fill-white me-2"></i>Password</label>
+    
+                                        <span class="text-danger" th:text="${session?.errorpassword}"></span>
+                                    </div>
+                                    <div class="mt-4 d-grid gap-2">
+                                        <button type="submit" id="btn-login" class="btn btn-primary btn-lg px-4">Sign in</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script th:src="@{/webjars/bootstrap/5.1.0/js/bootstrap.bundle.min.js}"></script>
+</html>

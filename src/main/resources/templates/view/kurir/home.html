@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Kurir</h4>
+        <a class="btn btn-primary" th:href="@{form/as}">Add</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Nama</th>
+                <th>Nomor Telepon</th>
+                <th colspan="2">Aksi</th>
+            </thead>
+            <tbody>
+                <tr th:each="kurir: ${kurirs}">
+                    <td th:text="${kurir.nama}"></td>
+                    <td th:text="${kurir.nomorTelepon}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{'form/'+${kurir.id}}">perbarui</a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-delete" th:data="${kurir.id}" th:url="@{'delete/' + ${kurir.id}}">hapus</button>
+                    </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(kurirs)}">
+                    <td colspan="7" class="text-center">No data</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>

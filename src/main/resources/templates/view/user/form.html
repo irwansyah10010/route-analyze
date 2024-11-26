@@ -1,0 +1,71 @@
+
+<div class="card">
+    <div class="card-header  d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Form User</h4>
+        <a class="btn btn-primary" th:href="@{../}">Back</a>
+    </div>
+</div>
+
+<form th:action="@{../addedit/}" method="post" th:object="${user}">
+    <!-- Form Group untuk ID (disembunyikan) -->
+    <div class="form-group">
+        <input type="hidden" th:field="*{id}" class="form-control" placeholder="id">
+    </div>
+
+    <!-- Form Group untuk Nama Lengkap -->
+    <div class="form-group mb-3">
+        <label for="fullName">Nama Lengkap</label>
+        <input type="text" th:field="*{fullName}" class="form-control" placeholder="Nama Lengkap">
+        <span class="text-danger" th:text="${errorfullName}"></span>
+    </div>
+
+    <!-- Form Group untuk Password -->
+    <div class="form-group mb-3">
+        <label for="password">Password</label>
+        <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
+    </div>
+
+    <!-- Form Group untuk Tempat Lahir -->
+    <div class="form-group mb-3">
+        <label for="placeOfBirth">Tempat Lahir</label>
+        <input type="text" th:field="*{placeOfBirth}" class="form-control" placeholder="Tempat Lahir">
+        <span class="text-danger" th:text="${errorplaceOfBirth}"></span>
+    </div>
+
+    <!-- Form Group untuk Tanggal Lahir -->
+    <div class="form-group mb-3">
+        <label for="dateOfBirth">Tanggal Lahir</label>
+        <input type="date" th:field="*{dateOfBirth}" class="form-control" placeholder="Tanggal Lahir">
+        <span class="text-danger" th:text="${errordateOfBirth}"></span>
+    </div>
+
+    <!-- Form Group untuk Email -->
+    <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <input type="text" th:field="*{email}" class="form-control" placeholder="Email">
+        <span class="text-danger" th:text="${erroremail}"></span>
+    </div>
+
+    <!-- Form Group untuk Alamat -->
+    <div class="form-group mb-3">
+        <label for="address">Alamat</label>
+        <textarea th:field="*{address}" class="form-control" placeholder="Alamat"></textarea>
+    </div>
+
+    <!-- Form Group untuk Role -->
+    <div class="form-group mb-3">
+        <label for="roleId">Role</label>
+        <select th:field="*{roleId}" class="form-control">
+            <option th:each="role: ${roles}" th:value="${role.id}" th:text="${role.roleName}"></option>
+        </select>
+        <span class="text-danger" th:text="${errorroleId}"></span>
+    </div>
+
+    <!-- Button untuk Save -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+
+

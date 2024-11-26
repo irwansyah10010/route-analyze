@@ -1,0 +1,38 @@
+
+<div class="card">
+    <div class="card-header  d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Form Menu</h4>
+        <a class="btn btn-primary" th:href="@{../}">Back</a>
+    </div>
+</div>
+
+<!-- <h2 th:text="${'Message Before '+message}"></h2> -->
+
+<!-- <span th:text="${error}"></span><br> -->
+
+<form th:action="@{../addedit/}" method="post" th:object="${menu}">
+    <!-- Form Group untuk ID -->
+    <div class="form-group">
+        <input type="hidden" th:field="*{id}" class="form-control" placeholder="id">
+    </div>
+    
+    <!-- Form Group untuk Name -->
+    <div class="form-group mb-3">
+        <label for="name">Name</label>
+        <input type="text" th:field="*{name}" class="form-control" placeholder="Enter name">
+        <span class="text-danger" th:text="${errorname}"></span>
+    </div>
+    
+    <!-- Form Group untuk Module -->
+    <div class="form-group mb-3">
+        <label for="module">Module</label>
+        <input type="text" th:field="*{module}" class="form-control" placeholder="Enter module">
+        <span class="text-danger" th:text="${errormodule}"></span>
+    </div>
+    
+    <!-- Button untuk Save -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+

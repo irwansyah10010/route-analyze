@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="robots" content="noindex,nofollow"/>
+    <title>Index</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/custom.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/sweetalert2/10.12.5/dist/sweetalert2.min.css}"/>
+</head>
+<body>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script th:src="@{/vendor/toastr/toastr.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.1.0/js/bootstrap.bundle.min.js}"></script>
+    <!-- apps -->
+    <script th:src="@{/assets/javascript/app.min.js}"></script>
+    <script th:src="@{/assets/javascript/app.init.js}"></script>
+    <script th:src="@{/assets/javascript/app-style-switcher.js}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script th:src="@{/webjars/perfect-scrollbar/0.6.11/js/perfect-scrollbar.jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery.sparkline/2.1.2/jquery.sparkline.min.js}"></script>
+    <!-- SweetAlert2 -->
+    <script th:src="@{/webjars/sweetalert2/10.12.5/dist/sweetalert2.all.min.js}"></script>
+    <!--Wave Effects -->
+    <script th:src="@{/assets/javascript/waves.js}"></script>
+    <!--Menu sidebar -->
+    <script th:src="@{/assets/javascript/sidebarmenu.js}"></script>
+    <!--Custom JavaScript -->
+    <script th:src="@{/assets/javascript/feather.min.js}"></script>
+    <script th:src="@{/assets/javascript/custom.min.js}"></script>
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header">
+                     <!-- This is for the sidebar toggle which is visible on mobile only  -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ri-close-line ri-menu-2-line fs-6"></i></a>
+                     <!-- ============================================================== 
+                     Logo 
+                     ==============================================================  -->
+                     <a class="navbar-brand" th:href="@{/}" style="justify-content: center;">
+                        <!-- Logo icon  -->
+                        <b class="logo-icon">
+                            <!-- Dark Logo icon  -->
+                            <img th:src="@{/assets/images/logos/bishub-logo.png}" alt="homepage" class="dark-logo img-fluid" style="max-width: 100px;" />
+                            <!-- Light Logo icon  -->
+                            <img th:src="@{/assets/images/logos/bishub-light-logo.png}" alt="homepage" class="light-logo img-fluid" style="max-width: 100px;" />
+                        </b>
+                        <!-- End Logo icon -->
+                    </a>
+                    
+    
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ri-more-line fs-6"></i></a>
+                </div>
+                 
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                     <!-- ============================================================== 
+                     toggle and nav items 
+                     ==============================================================  -->
+                    <ul class="navbar-nav me-auto">
+                         <!-- This is   -->
+                        <li class="nav-item">
+                            <a class="nav-link sidebartoggler d-none d-md-block" href="javascript:void(0)"><i data-feather="menu"></i></a>
+                        </li>
+                    </ul>
+                     <!-- ============================================================== 
+                     Right side toggle and nav items 
+                     ==============================================================  -->
+                    <ul class="navbar-nav">
+                         <!-- ============================================================== 
+                         Profile 
+                         ==============================================================  -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/}"><i class="ri-group-1-fill"></i><span class="hide-menu">Dashboard</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i data-feather="shuffle"></i><span class="hide-menu">Management System</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <!-- <li class="sidebar-item"><a class="sidebar-link" th:href="@{/menu/}"><i class="ri-group-1-fill"></i><span class="hide-menu">Menu</span></a>
+                                </li> -->
+                                <li class="sidebar-item"><a class="sidebar-link" th:href="@{/user/}"><i class="ri-user-2-fill"></i><span class="hide-menu">User</span></a>
+                                </li>
+                                <li class="sidebar-item"><a class="sidebar-link" th:href="@{/role/}"><i class="bi-diagram-3-fill"></i><span class="hide-menu">Role</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i data-feather="sliders"></i><span class="hide-menu">Management BCO</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a class="sidebar-link" th:href="@{/kurir/}"><i class="bi bi-truck"></i><span class="hide-menu">Kurir</span></a>
+                                </li>
+                                <li class="sidebar-item"><a class="sidebar-link" th:href="@{/laporan/}"><i class="bi bi-card-text"></i><span class="hide-menu">Laporan</span></a>
+                                </li>
+                                <li class="sidebar-item"><a class="sidebar-link" th:href="@{/pemasok/}"><i class="bi bi-bag-fill"></i><span class="hide-menu">Pemasok</span></a>
+                                </li>
+                                <li class="sidebar-item"><a class="sidebar-link" th:href="@{/pengaturan/}"><i class="bi bi-gear"></i><span class="hide-menu">Pengaturan</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{logout}"><i class="ri-logout"></i><span class="hide-menu">Logout</span></a>
+                        </li>
+
+                        <!-- <li class="nav-small-cap">
+                            <i class="nav-small-line"></i>
+                            <span class="hide-menu">Dashboards</span>
+                        </li> -->
+                        
+                        <!-- <li sec:authorize="hasAuthority('setting')" class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i data-feather="sliders"></i><span class="hide-menu">System Setting</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li sec:authorize="hasAuthority('masterdata')" class="sidebar-item">
+                                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ri-book-2-line"></i><span class="hide-menu">Master Data</span></span></a>
+                                    <ul aria-expanded="false" class="collapse second-level">
+                                        <li sec:authorize="hasAuthority('masterdata/branch')" class="sidebar-item"><a th:href="@{/masterdata/index?page=branch}" class="sidebar-link"><i class="ri-map-pin-line"></i><span class="hide-menu">Branch</span></a></li>
+                                    </ul>
+                                </li>
+                                <li sec:authorize="hasAuthority('setting/scheduler')" class="sidebar-item"><a th:href="@{/setting/index?page=scheduler}" class="sidebar-link"><i class="ri-timer-line"></i><span class="hide-menu">Scheduled Task</span></a></li>
+                                <li sec:authorize="hasAuthority('setting/parameter')" class="sidebar-item"><a th:href="@{/setting/index?page=parameter}" class="sidebar-link"><i class="ri-pencil-ruler-line"></i><span class="hide-menu">Parameter</span></a></li>
+                                <li sec:authorize="hasAuthority('setting/shortcut')" class="sidebar-item"><a th:href="@{/setting/index?page=shortcut}" class="sidebar-link"><i class="ri-remote-control-line"></i><span class="hide-menu">Quick Shortcut</span></a></li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+    
+        <div class="page-wrapper">
+            <div class="alert customize-alert text-danger alert-light-danger fade show mb-0" role="alert" th:if="${error}">
+                <div class="font-weight-light text-center">
+                    <span th:text="${error}"></span>
+                </div>
+            </div>
+            <!-- <div class="alert customize-alert text-warning alert-light-warning fade show mb-0" role="alert" th:if="${session.formWarning!=null && #strings.length(session.formWarning)>0}">
+                <div class="font-weight-light text-center">
+                    <span th:utext="${session.formWarning}"></span>
+                    <span th:text="${@common.removeSessionAttribute('formWarning')}" th:remove="tag"></span>
+                </div>
+            </div> -->
+            <div class="alert customize-alert text-success alert-light-success fade show mb-0" role="alert" th:if="${notification}">
+                <div class="font-weight-light text-center">
+                    <span th:text="${notification}"></span>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-titles">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-12 align-self-center">
+                        <h1 class="mb-0 fw-bold" th:text="${title}"></h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 d-flex align-items-center">
+                                <li class="breadcrumb-item active" th:each="module : ${hierarchyModule}" th:text="${module}"></li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class=" col-lg-4 col-md-6 d-none d-md-flex align-items-center justify-content-end" th:if="${allowAdd}">
+                        <button id="ajax-loader-add" class="btn btn-outline-primary" type="button" disabled style="display: none">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                        <span id="btn-add" th:attr="data-url=${urlForm}, data-mode='add', data-title=${'Add '+title}" class="btn btn-primary align-items-center ms-2" style="display:flex;"><i class="ri-add-line me-1"></i>Add New</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <!-- ============================================================= -->
+            <!-- Start Page Content -->
+            <!-- ============================================================= -->
+            <div class="row">
+                <div class="col-lg-8 col-md-10 offset-lg-3 offset-md-2" th:include="~{${content}}"></div>
+
+            </div>
+
+            <div class="row" th:if="${modaldelete}">
+                <div th:include="~{${modaldelete}}"></div>
+            </div>
+            
+            <!-- ============================================================= -->
+            <!-- End PAge Content -->
+            <!-- ============================================================= -->
+        </div>
+        <footer class="footer text-center">
+            © 2024 
+        </footer>
+    </div>
+    <script>
+        $(document).ready(function(evt){
+            $('.btn-delete').on('click', function(evt){
+                $('#modal-confirm-danger').modal('show');
+    
+                let data = $(this).attr('data')
+                let url = $(this).attr('url')
+
+                $('#btn-delete-action').attr('data', data).attr('url',url)
+            })
+
+            $('#btn-delete-action').on('click', function(){
+                $.get($('#btn-delete-action').attr('url'),function(response) {
+                    $('#modal-confirm-danger').modal('hide');
+
+                    location.reload(true)
+                })
+            })
+        })
+    </script>
+</body>
+</html>

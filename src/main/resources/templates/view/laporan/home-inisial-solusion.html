@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="mb-0 text-secondary" th:text="${ 'hasil laporan tanggal '+laporan.tanggalLaporan+' oleh '+laporan.namaKurir}">Hasil</h4>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>No</th>
+                <th>Pemasok</th>
+                <th>Fitness</th>
+                <th>Solusi</th>
+            </thead>
+            <tbody>
+                <tr th:each="inisialSolusion, iter: ${inisialSolusions}">
+                    <td th:text="${iter.index + 1}"></td>
+                    <td th:text="${inisialSolusion.pengambilanBarang.pemasok.namaPemasok}"></td>
+                    <td th:text="${inisialSolusion.fitness}"></td>
+                    <td th:text="${inisialSolusion.solusi}"></td>
+                </tr>
+        
+                <tr th:if="${#lists.isEmpty(inisialSolusions)}">
+                    <td colspan="3" class="text-center"> No data</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>

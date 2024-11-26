@@ -1,0 +1,98 @@
+<div class="card">
+    <div class="card-header  d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Laporan</h4>
+        <a class="btn btn-primary" th:href="@{form/as}">Add</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Tanggal Laporan</th>
+                <th>Kurir</th>
+                <th>Detail Barang</th>
+                <th colspan="2">Aksi</th>
+            </thead>
+            <tbody>
+                <tr th:each="laporan: ${laporans}">
+                    <td th:text="${laporan.tanggalLaporan}"></td>
+                    <td th:text="${laporan.namaKurir}"></td>
+                    <td>
+                        <button type="button" class="btn btn-success" id="btn-pengambilan-detail" th:data-id="${laporan.id}" th:data-url="${'pengambilan-barang/'+laporan.id}">Detail</button>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{'rute/'+${laporan.id}}" th:if="${!laporan.isCalculateSolusion}">Rute</a>
+                        <a class="btn btn-success" th:href="@{'inisial-solusion/'+${laporan.id}}" th:if="${laporan.isCalculateSolusion}">Hasil</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{'delete/'+${laporan.id}}">delete</a>
+                    </td>
+                </tr>
+        
+                <tr th:if="${#lists.isEmpty(laporans)}">
+                    <td colspan="6" class="text-center"> No data</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>
+<div id="modal-show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content modal-filled bg-light-danger">
+            <div class="modal-header modal-colored-header bg-primary text-white">
+                <h3 class="modal-title">Show</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <i data-feather="x-octagon" class="fill-white feather-lg text-warning"></i>
+                <h4 class="mt-2">Pengambilan Barang</h4>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Jumlah</th>
+                        </thead>
+                        <tbody id="data">
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#btn-pengambilan-detail").on('click',function(evt) {
+            $("#modal-show").modal('show');
+
+            $.ajax({
+                url: $('#btn-pengambilan-detail').attr('data-url'), // URL atau API endpoint yang mengembalikan data JSON
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    
+                    let rows = '';
+                    $.each(data, function(index, item) {
+                        rows += `<tr>
+                            <td>${index + 1}</td>
+                            <td>${item.namaBarang}</td>
+                            <td>${item.jumlah}</td>
+                        </tr>`;
+                    });
+                    $('#data').html(rows);
+                },
+                error: function(error) {
+                    console.log("Error:", error);
+                }
+            });
+            
+        })
+    });
+</script>

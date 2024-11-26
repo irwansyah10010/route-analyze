@@ -1,0 +1,15 @@
+databaseChangeLog:
+- changeSet:
+      id: 1
+      author: irwansyah
+      changes:
+        - sqlFile:
+            path: db/schema/schema.sql
+            relativeToChangelogFile: false
+- changeSet:
+        id: 2
+        author: irwansyah
+        changes:
+          - sqlFile:
+              path: db/data/data.sql
+              relativeToChangelogFile: false

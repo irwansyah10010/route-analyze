@@ -1,0 +1,43 @@
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Pemasok</h4>
+        <a class="btn btn-primary" th:href="@{form/as}">Add</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Nama Pemasok</th>
+                <th>Alamat</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th colspan="2">Aksi</th>
+            </thead>
+            <tbody>
+                <tr th:each="pemasok: ${pemasoks}" th:class="${pemasok.tandai}? 'bg-secondary text-white':''">
+                    <td th:text="${pemasok.namaPemasok}"></td>
+                    <td th:text="${pemasok.alamat}"></td>
+                    <td th:text="${pemasok.latitude}"></td>
+                    <td th:text="${pemasok.longitude}"></td>
+                    <td th:if="${!pemasok.tandai}">
+                        <a class="btn btn-warning" th:href="@{'form/'+${pemasok.id}}">perbarui</a>
+                    </td>
+                    <td th:if="${!pemasok.tandai}">
+                        <button type="button" class="btn btn-danger btn-delete" th:data="${pemasok.id}" th:url="@{'delete/'+${pemasok.id}}">hapus</button>
+                    </td>
+
+                    <td th:if="${pemasok.tandai}" colspan="2">
+                        <i class="fas fa-check"></i>
+                    </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(pemasoks)}">
+                    <td colspan="7" class="text-center">No data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

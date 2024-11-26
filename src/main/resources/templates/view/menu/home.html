@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header  d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Menu</h4>
+        <a class="btn btn-primary" th:href="@{form/as}">Add</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Menu</th>
+                <th>Module</th>
+                <th>Parent id</th>
+                <th colspan="2">Aksi</th>
+            </thead>
+            <tbody>
+                <tr th:each="menu: ${menus}">
+                    <td th:text="${menu.name}"></td>
+                    <td th:text="${menu.module}"></td>
+                    <td th:text="${menu.parentId}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{'form/'+${menu.id}}">perbarui</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{'delete/'+${menu.id}}">delete</a>
+                    </td>
+                </tr>
+        
+                <tr th:if="${#lists.isEmpty(menus)}">
+                    <td colspan="7" class="text-center"> No data</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>
+

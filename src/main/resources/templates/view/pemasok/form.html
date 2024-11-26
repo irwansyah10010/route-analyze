@@ -1,0 +1,162 @@
+<link rel="stylesheet" th:href="@{/vendor/leaflet/leaflet.css}"/>
+<style>
+    #map {
+        height: 300px; /* Set the height of the map */
+        width: 100%; /* Set the width of the map */
+    }
+</style>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Form Pemasok</h4>
+        <a class="btn btn-primary" th:href="@{../}">Back</a>
+    </div>
+</div>
+
+<!-- <span th:text="${error}"></span><br> -->
+
+<form th:action="@{../addedit/}" method="post" th:object="${pemasok}">
+    <!-- Form Group untuk ID -->
+    <div class="form-group">
+        <input type="hidden" th:field="*{id}" class="form-control" placeholder="id">
+    </div>
+    
+    <!-- Form Group untuk Nama Pemasok -->
+    <div class="form-group mb-3">
+        <label for="namaPemasok">Nama Pemasok</label>
+        <input type="text" th:field="*{namaPemasok}" class="form-control" placeholder="Masukan nama pemasok">
+        <span class="text-danger" th:text="${errornamaPemasok}"></span>
+    </div>
+
+    <span class="text-danger" th:text="${errorlatitude}"></span>
+    <div class="form-group">
+        <div id="map"></div>
+    </div>
+
+    <!-- Form Group untuk Alamat -->
+    <div class="form-group mb-3">
+        <label for="alamat">Alamat</label>
+        <textarea th:field="*{alamat}" class="form-control" placeholder="Masukan alamat"></textarea>
+        <span class="text-danger" th:text="${erroralamat}"></span>
+    </div>
+    
+    <!-- Form Group untuk Latitude -->
+    <div class="form-group mb-3">
+        <label for="latitude">Latitude</label>
+        <input type="text" th:field="*{latitude}" class="form-control" placeholder="Masukan latitude" readonly>
+        <!-- <span class="text-danger" th:text="${errorlatitude}"></span> -->
+    </div>
+
+    <!-- Form Group untuk Longitude -->
+    <div class="form-group mb-3">
+        <label for="longitude">Longitude</label>
+        <input type="text" th:field="*{longitude}" class="form-control" placeholder="Masukan longitude" readonly>
+        <!-- <span class="text-danger" th:text="${errorlongitude}"></span> -->
+    </div>
+    
+    <!-- Button untuk Save -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+<script th:src="@{/vendor/leaflet/leaflet.js}"></script>
+<script>
+    $(document).ready(function(){
+        // Initialize the map
+        var map = L.map('map').setView([-6.1751, 106.8650], 13); // Coordinates for Jakarta
+
+        // Load and display tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var currentMarker = null;
+
+        let longitude = "[[${pemasok.longitude}]]";
+        let latitude = "[[${pemasok.latitude}]]";
+
+        console.log(longitude);
+        
+
+        // if(latitude)
+        //     currentMarker = L.marker([latitude, longitude]).addTo(map)
+
+        map.on('click', function(e) {
+            if (currentMarker) {
+                map.removeLayer(currentMarker);
+            }
+
+            var lat = e.latlng.lat;
+            var lon = e.latlng.lng;
+            
+            $("#latitude").val(lat)
+            $("#longitude").val(lon)
+
+            currentMarker = L.marker([lat, lon]).addTo(map)
+                .bindPopup("Lat: " + lat + "<br>Lon: " + lon).openPopup();
+
+
+            //
+            function showPosition(){
+                // Call reverse geocoding API (Nominatim)
+                var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var location = data.address;
+                    // Extracting specific parts of the address
+                    var street = location.road || location.street || '';                 // Jalan
+                    var village = location.village || location.suburb || location.hamlet || location.town || location.neighbourhood || '';  // Desa/Kampung/Kelurahan
+                    var city = location.city || location.county || location.town || '';   // Kabupaten/Kota
+                    var province = location.state || '';                                  // Provinsi
+                    
+                    // Format the location in the desired order
+                    var displayLocation = `${street}; ${village}; ${city}; ${province}`;
+                    
+                    // Display the location (like Jakarta Barat, Jakarta Selatan)
+                    $("#alamat").val(displayLocation);
+                })
+                .catch(error => {
+                    console.error('Error fetching the reverse geocoding data:', error);
+                });
+            }
+
+            function showError(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("User denied the request for Geolocation.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("An unknown error occurred.");
+                        break;
+                }
+            }
+
+            function getLocation(lat, lon) {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+
+            getLocation();
+        });
+
+
+        
+
+        
+    });
+
+
+</script>

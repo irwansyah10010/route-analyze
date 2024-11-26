@@ -1,0 +1,24 @@
+<div id="modal-confirm-danger" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-filled bg-light-danger">
+            <div class="modal-header modal-colored-header bg-primary text-white">
+                <h3 class="modal-title">Delete</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i data-feather="x-octagon" class="fill-white feather-lg text-danger"></i>
+                <h4 class="mt-2">Delete Confirmation</h4>
+                <p class="mt-3">
+                    Are you sure want to delete <b><span id="x-name"></span> ?</b>
+                </p>
+            </div>
+            <div class="card-footer text-center">
+                <span id="ajax-loader" class="spinner-border text-danger" role="status" style="display: none"></span>
+                <div class="btn-group" id="ajax-btn" role="group" align="center">
+                    <button type="button" class="btn btn-sm btn-light-secondary btn-action" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-sm btn-danger" id="btn-delete-action">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

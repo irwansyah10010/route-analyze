@@ -1,0 +1,137 @@
+<div class="card">
+    <div class="card-header  d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Form Laporan</h4>
+        <a class="btn btn-primary" th:href="@{../}">Back</a>
+    </div>
+</div>
+
+<form th:action="@{../addedit/}" method="post" th:object="${laporan}">
+    <!-- Form Group untuk ID -->
+    <div class="form-group">
+        <input type="hidden" th:field="*{id}" class="form-control" placeholder="id">
+        <input type="hidden" name="pemasokJs" id="pemasokJs" th:value="${pemasoksJs}">
+    </div>
+    
+    <!-- Form Group untuk Tanggal Laporan -->
+    <div class="form-group mb-3">
+        <label for="tanggalLaporan">Tanggal Laporan</label>
+        <input type="date" th:field="*{tanggalLaporan}" class="form-control" placeholder="Enter tanggal laporan">
+        <span class="text-danger" th:text="${errortanggalLaporan}"></span>
+    </div>
+    
+    <!-- Form Group untuk Kurir ID -->
+    <div class="form-group mb-3">
+        <label for="kurirId">Kurir</label>
+        <select th:field="*{kurirId}" class="form-control">
+            <option value="">-- Pilih Kurir --</option>
+            <option th:each="kurir: ${kurirs}" th:value="${kurir.id}" th:text="${kurir.nama}"></option>
+        </select>
+        <span class="text-danger" th:text="${errorkurirId}"></span>
+    </div>
+    
+    <div class="form-group mb-3">
+        <span class="text-danger" th:text="${errorpengambilanBarangDtos}" id="errorpengambilanBarangDtos"></span>
+        <span class="text-danger" th:utext="${errorpengambilan}" id="errorpengambilan"></span>
+        <div id="inputGroupsContainer">
+            <div class="input-group mb-3" th:each="pengambilanBarangDto, iterStat : ${laporan.pengambilanBarangDtos}">
+                <!-- Form Group untuk Nama Barang -->
+                <div class="form-group">
+                    <label for="namaBarang">Nama Barang</label>
+                    <input type="text" th:field="*{pengambilanBarangDtos[__${iterStat.index}__].namaBarang}" class="form-control" placeholder="Masukkan nama barang">
+                </div>
+    
+                <!-- Form Group untuk Jumlah -->
+                <div class="form-group">
+                    <label for="jumlah">Jumlah</label>
+                    <input type="number" th:field="*{pengambilanBarangDtos[__${iterStat.index}__].jumlah}" class="form-control" placeholder="Masukkan jumlah">
+                </div>
+    
+                <!-- Form Group untuk Pemasok -->
+                <div class="form-group">
+                    <label for="pemasokId">Pemasok</label>
+                    <select th:field="*{pengambilanBarangDtos[__${iterStat.index}__].pemasokId}" class="form-control">
+                        <option value="">-- Pilih Pemasok --</option>
+                        <option th:each="pemasok : ${pemasoks}" th:value="${pemasok.id}" th:text="${pemasok.namaPemasok}"></option>
+                    </select>
+                </div>
+    
+                <!-- Remove Button -->
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger removeInputGroup">Remove</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Button untuk Menambah Input Baru -->
+        <div class="form-group">
+            <button type="button" id="addInputGroup" class="btn btn-secondary">Tambah Input Baru</button>
+        </div>
+    </div>
+
+    <!-- Button untuk Save -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    let index = 0; // Initialize index for input groups
+
+    let pemasoks = JSON.parse($("#pemasokJs").val());
+
+    // Function to update the index of existing input groups
+    function updateInputGroupNames() {
+        $('#inputGroupsContainer .input-group').each(function(i) {
+            $(this).find('input[name^="pengambilanBarangDtos"]').each(function() {
+                const name = $(this).attr('name');
+                $(this).attr('name', name.replace(/\[\d+\]/, `[${i}]`)); // Update name attribute
+            });
+
+            $(this).find('select[name^="pengambilanBarangDtos"]').each(function() {
+                const name = $(this).attr('name');
+                $(this).attr('name', name.replace(/\[\d+\]/, `[${i}]`)); // Update name attribute
+            });
+        });
+    }
+    
+    // Add new input group
+    $('#addInputGroup').click(function() {
+        $('#inputGroupsContainer').append(`
+            <div class="input-group mb-3">
+                <div class="form-group">
+                    <label for="namaBarang">Nama Barang</label>
+                    <input type="text" name="pengambilanBarangDtos[${index}].namaBarang" class="form-control" placeholder="Masukkan nama barang">
+                </div>
+                <div class="form-group">
+                    <label for="jumlah">Jumlah</label>
+                    <input type="number" name="pengambilanBarangDtos[${index}].jumlah" class="form-control" placeholder="Masukkan jumlah">
+                </div>
+                <div class="form-group">
+                    <label for="pemasokId">Pemasok</label>
+                    <select name="pengambilanBarangDtos[${index}].pemasokId" class="form-control" id="selectPemasok-${index}">
+                        <option value="">-- Pilih Pemasok --</option>
+                        <!-- Populate with options -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger removeInputGroup">Remove</button>
+                </div>
+            </div>
+        `);
+
+        pemasoks.forEach(pemasok => {
+            $(`#selectPemasok-${index}`).append(`<option value="${pemasok.id}">${pemasok.namaPemasok}</option>`);
+        });
+
+        index++; // Increment index for the next input group
+    });
+
+    // Remove input group
+    $(document).on('click', '.removeInputGroup', function() {
+        $(this).closest('.input-group').remove();
+        updateInputGroupNames(); // Update names of remaining input groups
+    });
+});
+
+</script>

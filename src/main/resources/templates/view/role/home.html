@@ -1,0 +1,29 @@
+
+<div class="card">
+    <div class="card-header  d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">Role</h4>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Role Name</th>
+                <th>Dibuat Pada</th>
+                <th>Dibuat Oleh</th>
+            </thead>
+            <tbody>
+                <tr th:each="role: ${roles}">
+                    <td th:text="${role.roleName}"></td>
+                    <td th:text="${role.createdAt}"></td>
+                    <td th:text="${role.createdBy}"></td>
+                </tr>
+        
+                <tr th:if="${#lists.isEmpty(roles)}">
+                    <td colspan="7" class="text-center"> No data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

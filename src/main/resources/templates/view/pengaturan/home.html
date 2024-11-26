@@ -1,0 +1,105 @@
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="mb-0 text-secondary">Pengaturan BCO</h4>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+
+            <tbody>
+                <tr th:each="pengaturanParam : ${pengaturanParams}">
+                    <td th:text="${pengaturanParam.label}"></td>
+
+                    <td th:if="${pengaturanParam.format == 'JSON'}">
+                        <span th:utext="${pengaturanParam.taggingValue}" th:remove="tag"></span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-pengaturan" th:data="${pengaturanParam.id}">Perbarui</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="modal-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content modal-filled bg-light-danger">
+                    <div class="modal-header modal-colored-header bg-primary text-white">
+                        <h3 class="modal-title">Delete</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <i data-feather="x-octagon" class="fill-white feather-lg text-warning"></i>
+                        <h4 class="mt-2">Update Confirmation</h4>
+                        <p class="mt-3">
+                            Are you sure want to change <b><span id="x-name"></span> ?</b>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <span id="ajax-loader" class="spinner-border text-danger" role="status" style="display: none"></span>
+                        <div class="btn-group" id="ajax-btn" role="group" align="center">
+                            <button type="button" class="btn btn-sm btn-light-secondary btn-action" data-bs-dismiss="modal">Cancel</button>
+                            <form th:action="@{addedit/}" method="post" th:object="${pengaturan}">
+                                <input type="hidden" th:field="*{id}">
+                    
+                                <input type="hidden" th:field="*{value}">
+                                
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Perbarui</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".btn-pengaturan").attr("disabled",true)
+        var index = 0
+
+        $("#traffic_conditions").on('change',function (evt) {
+            $("#value").val($("#traffic_conditions").val())
+
+            $(".btn-pengaturan").attr("disabled",true)
+            $(".btn-pengaturan").eq(0).attr("disabled",false)
+
+            index = 0
+        })
+
+        $("#vehicle_type").on('change',function (evt) {
+            $("#value").val($("#vehicle_type").val())
+
+            $(".btn-pengaturan").attr("disabled",true)
+            $(".btn-pengaturan").eq(1).attr("disabled",false)
+
+            index = 1
+        })
+        
+        $("#weather_conditions").on('change',function (evt) {
+            $("#value").val($("#weather_conditions").val())
+
+            $(".btn-pengaturan").attr("disabled", true)
+            $(".btn-pengaturan").eq(2).attr("disabled", false)
+
+            index = 2
+        })
+
+
+
+        $(".btn-pengaturan").on('click',function(evt){
+            if (index === 0) 
+                $("#id").val($(".btn-pengaturan").eq(0).attr('data'))
+            else if (index === 1) 
+                $("#id").val($(".btn-pengaturan").eq(1).attr('data'))
+            else if (index === 2) 
+                $("#id").val($(".btn-pengaturan").eq(2).attr('data'))
+
+            $('#modal-confirm').modal('show');
+        })
+    })
+</script>

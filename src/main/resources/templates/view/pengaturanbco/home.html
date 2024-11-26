@@ -1,0 +1,87 @@
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="mb-0 text-secondary">Pengaturan BCO</h4>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+                <form th:action="@{addedit/}" method="post" th:object="${pengaturanBCO}">
+                    <!-- Hidden field for ID -->
+                    <tr>
+                        <td>ID</td>
+                        <td>
+                            <input type="hidden" th:field="*{id}" class="form-control">
+                        </td>
+                    </tr>
+
+                    <!-- Max Iterations -->
+                    <tr>
+                        <td>Max Iterations</td>
+                        <td>
+                            <input type="text" th:field="*{maxIterations}" class="form-control" placeholder="Masukkan Max Iterations">
+                        </td>
+                    </tr>
+
+                    <!-- Population Size -->
+                    <tr class="hidden">
+                        <td>Population Size</td>
+                        <td>
+                            <input type="text" th:field="*{populationSize}" class="form-control" placeholder="Masukkan Population Size">
+                        </td>
+                    </tr>
+
+                    <!-- Employed Bees -->
+                    <tr>
+                        <td>Employed Bees</td>
+                        <td>
+                            <input type="text" th:field="*{employedBees}" class="form-control" placeholder="Masukkan Employed Bees">
+                        </td>
+                    </tr>
+
+                    <!-- Onlooker Bees -->
+                    <tr>
+                        <td>Onlooker Bees</td>
+                        <td>
+                            <input type="text" th:field="*{onlookerBees}" class="form-control" placeholder="Masukkan Onlooker Bees">
+                        </td>
+                    </tr>
+
+                    <!-- Scout Bees -->
+                    <tr>
+                        <td>Scout Bees</td>
+                        <td>
+                            <input type="text" th:field="*{scoutBees}" class="form-control" placeholder="Masukkan Scout Bees">
+                        </td>
+                    </tr>
+
+                    <!-- Objective -->
+                    <tr>
+                        <td>Objective</td>
+                        <td>
+                            <input type="text" th:field="*{objective}" class="form-control" placeholder="Masukkan Objective">
+                        </td>
+                    </tr>
+                    
+                    <!-- Laporan -->
+                    <tr class="hidden">
+                        <td>Laporan id</td>
+                        <td>
+                            <input type="text" th:field="${pengaturanBCO.laporan.id}" class="form-control" placeholder="Masukkan Laporan">
+                        </td>
+                    </tr>
+
+                    <!-- Submit Button -->
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+</div>

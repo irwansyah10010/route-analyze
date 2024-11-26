@@ -1,0 +1,18 @@
+
+/* CSS untuk membuat halaman dengan tinggi penuh */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.main-wrapper {
+    height: 100vh; /* Menggunakan seluruh tinggi viewport */
+}
+.auth-wrapper {
+    height: 100%; /* Mengambil tinggi penuh dalam kontainer */
+}
+.auth-box-2 {
+    height: 100%; /* Mengambil tinggi penuh sidebar */
+}
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,46 @@
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-secondary">User</h4>
+        
+        <a class="btn btn-primary" th:href="@{form/as}">Add</a>
+    </div>
+</div>
+<div class="card">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Full name</th>
+                <th>Tempat Lahir</th>
+                <th>Tanggal Lahir</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Dibuat Pada</th>
+                <th>Dibuat Oleh</th>
+                <th colspan="2">Aksi</th>
+            </thead>
+            <tbody>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.fullName}"></td>
+                    <td th:text="${user.placeOfBirth}"></td>
+                    <td th:text="${user.dateOfBirth}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.roleName}"></td>
+                    <td th:text="${user.createdAt}"></td>
+                    <td th:text="${user.createdBy}"></td>
+        
+                    <td>
+                        <a class="btn btn-warning" th:href="@{'form/'+${user.id}}">perbarui</a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-delete" th:data="${user.id}" th:url="@{'delete/'+${user.id}}">hapus</button>
+                    </td>
+                </tr>
+        
+                <tr th:if="${#lists.isEmpty(users)}">
+                    <td colspan="7" class="text-center"> No data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+</div>

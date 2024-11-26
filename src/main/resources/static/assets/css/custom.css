@@ -1,0 +1,46 @@
+.cursor-pointer{
+    cursor: pointer;
+}
+.btn-action{
+    width: 80px;
+}
+.dropdown-menu{
+    padding: 0;
+}
+.dropdown-item {
+    padding: .35rem .5rem;
+}
+.page-titles {
+     max-width: 100%;
+}
+.page-wrapper > .container-fluid, .page-wrapper > .container-lg, .page-wrapper > .container-md, .page-wrapper > .container-sm, .page-wrapper > .container-xl, .page-wrapper > .container-xxl {
+    max-width: 100%;
+}
+.h-40px{
+    height: 40px;
+}
+.twitter-typeahead {
+     width: auto;
+}
+@media (min-width:1000px) {
+    .modal-xl,
+    .modal-xxl{
+        max-width: 900px
+    }
+}
+@media (min-width:1500px) {
+    .modal-xxxl {
+        max-width: 1440px
+    }
+}
+
+/* Chrome, Safari, Edge, Opera : hide input type number spinner */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
